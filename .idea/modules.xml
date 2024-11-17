@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/limo-rent.iml" filepath="$PROJECT_DIR$/.idea/limo-rent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/limorent-backend/limorent-backend.iml" filepath="$PROJECT_DIR$/limorent-backend/limorent-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/limorent-frontend.iml" filepath="$PROJECT_DIR$/limorent-frontend.iml" />
     </modules>
   </component>
