@@ -65,3 +65,13 @@
   }
 }
 
+.link-hover {
+  display: inline-block;
+}
+
+.link-hover:hover {
+  background: linear-gradient(90deg, #FFCE2D, #FFA72D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
