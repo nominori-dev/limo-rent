@@ -1,14 +1,10 @@
-// React and Next.js imports
-import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowRight } from "lucide-react";
 
-// Local component imports
 import { Section, Container } from "@/app/components/craft";
 import { Button } from "../ui/button";
 
-import Placeholder from "@/public/placeholder.jpg";
 import RetroGrid from "@/app/components/ui/retro-grid";
 
 const Hero = () => {
