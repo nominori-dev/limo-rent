@@ -47,7 +47,7 @@ export default function Navbar() {
                             </Link>
                         </div>
                     </div>
-                    <ul className="hidden header sm:flex space-x-4 text-xl text-gray-800 uppercase">
+                    <ul className="hidden header sm:flex space-x-4 text-xl font-medium text-gray-800 uppercase">
                         <li className={''}><NavLink href={'/#about-section'}
                                                     section={'about-section'}
                                                     activePage={'/'}>O nas</NavLink></li>
