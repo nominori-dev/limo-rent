@@ -1,6 +1,6 @@
 package com.nominori.limorentbackend.service.impl;
 
-import com.nominori.limorentbackend.dao.PostRepository;
+import com.nominori.limorentbackend.model.dao.PostRepository;
 import com.nominori.limorentbackend.model.entity.Post;
 import com.nominori.limorentbackend.service.PostService;
 import lombok.RequiredArgsConstructor;
