@@ -11,9 +11,11 @@ public interface PostService {
 
     List<Post> getAllPosts();
 
-    Optional<Post> getPostById(Long id);
+    Post getPostById(Long id);
 
     Post updatePost(Long id, Post updatedPost);
 
     void deletePost(Long id);
+
+    Post getPostBySlug(String slug);
 }
