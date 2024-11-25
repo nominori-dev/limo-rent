@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createMDX from '@next/mdx';
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -9,7 +10,10 @@ const nextConfig: NextConfig = {
                 hostname: 'images.unsplash.com',
             }
         ]
-    }
+    },
+    pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };
 
-export default nextConfig;
+const withMdx = createMDX();
+
+module.exports = withMdx(nextConfig);

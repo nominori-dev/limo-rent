@@ -60,10 +60,9 @@ export default function Navbar() {
                                                     section={'services-section'}
                                                     activePage={'/'}>Organizacja imprez</NavLink>
                         </li>
-                        <li><span
-                            className={'text-primary hover:animate-gradient-x hover:bg-gradient-to-l hover:from-accent hover:to-error hover:via-accent hover:text-transparent bg-clip-text cursor-pointer'}
-                            onClick={() => scrollToSection('contact-section')}>Kontakt</span></li>
-                        <li>
+                        <li className={''}><NavLink href={'/contact'}
+                                                    section={'contact-section'}
+                                                    activePage={'/'}>Kontakt</NavLink>
                         </li>
                     </ul>
                 </div>
