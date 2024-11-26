@@ -15,7 +15,7 @@ public class VehiclePrice {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 

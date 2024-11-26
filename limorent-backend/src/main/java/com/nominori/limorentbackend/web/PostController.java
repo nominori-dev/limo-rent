@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/post/")
+@RequestMapping("/api/post")
 @RequiredArgsConstructor
 @Tag(name = "Post API")
 public class PostController {
