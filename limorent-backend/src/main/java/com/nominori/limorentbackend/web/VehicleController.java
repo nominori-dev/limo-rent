@@ -11,6 +11,8 @@ import com.nominori.limorentbackend.web.dto.VehicleResponse;
 import com.nominori.limorentbackend.web.mapper.VehiclePriceMapper;
 import com.nominori.limorentbackend.web.mapper.VehicleRequestMapper;
 import com.nominori.limorentbackend.web.mapper.VehicleResponseMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/vehicle")
 @RequiredArgsConstructor
-@Tag(name = "Vehicle API")
+@Tag(name = "Vehicle API", description = "API for managing vehicles and their pricing.")
 public class VehicleController {
 
     private final VehicleService vehicleService;
@@ -32,20 +34,23 @@ public class VehicleController {
     private final VehiclePriceService vehiclePriceService;
     private final VehiclePriceMapper priceMapper;
 
-
-
+    @Operation(summary = "Get all vehicles", description = "Retrieve a list of all available vehicles.")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<VehicleResponse> getAllVehicles() {
         return vehicleService.getAll().stream().map(responseMapper::toDto).toList();
     }
 
+    @Operation(summary = "Get vehicle by ID", description = "Retrieve details of a specific vehicle by its ID.")
+    @Parameter(name = "id", description = "The ID of the vehicle to retrieve.", required = true)
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public VehicleResponse getVehicleById(@PathVariable Long id) {
         return responseMapper.toDto(vehicleService.getById(id));
     }
 
+    @Operation(summary = "Get vehicles by class", description = "Retrieve vehicles belonging to a specific class.")
+    @Parameter(name = "class", description = "The class of vehicles to retrieve.", required = true)
     @GetMapping("/class/{class}")
     @ResponseStatus(HttpStatus.OK)
     public List<VehicleResponse> getVehiclesByClass(@PathVariable(name = "class") String className) {
@@ -53,6 +58,7 @@ public class VehicleController {
         return vehicleService.getByClass(vehicleClass).stream().map(responseMapper::toDto).toList();
     }
 
+    @Operation(summary = "Create a new vehicle", description = "Add a new vehicle to the system.")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public VehicleResponse createVehicle(@RequestBody VehicleRequest vehicleRequest) {
@@ -60,6 +66,8 @@ public class VehicleController {
         return responseMapper.toDto(vehicleService.add(vehicle));
     }
 
+    @Operation(summary = "Update vehicle details", description = "Update the details of an existing vehicle by its ID.")
+    @Parameter(name = "id", description = "The ID of the vehicle to update.", required = true)
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public VehicleResponse updateVehicle(@PathVariable Long id, @RequestBody VehicleRequest vehicleRequest) {
@@ -67,18 +75,23 @@ public class VehicleController {
         return responseMapper.toDto(vehicleService.update(id, vehicle));
     }
 
+    @Operation(summary = "Get all vehicle prices", description = "Retrieve a list of all vehicle prices.")
     @GetMapping("/price")
     @ResponseStatus(HttpStatus.OK)
     public List<VehiclePriceResponse> getAllVehiclePrices() {
         return vehiclePriceService.getAllVehiclePrices().stream().map(priceMapper::toDto).toList();
     }
 
+    @Operation(summary = "Get vehicle price by ID", description = "Retrieve a specific vehicle price by its ID.")
+    @Parameter(name = "id", description = "The ID of the vehicle price to retrieve.", required = true)
     @GetMapping("/price/{id}")
     @ResponseStatus(HttpStatus.OK)
     public VehiclePriceResponse getVehiclePriceById(@PathVariable Long id) {
         return priceMapper.toDto(vehiclePriceService.getById(id));
     }
 
+    @Operation(summary = "Get prices for a specific vehicle", description = "Retrieve all pricing details for a given vehicle by its ID.")
+    @Parameter(name = "id", description = "The ID of the vehicle whose prices to retrieve.", required = true)
     @GetMapping("/{id}/price")
     @ResponseStatus(HttpStatus.OK)
     public List<VehiclePriceResponse> getVehiclePriceByVehicleId(@PathVariable Long id) {
@@ -86,6 +99,7 @@ public class VehicleController {
         return vehiclePriceService.getByVehicle(vehicle).stream().map(priceMapper::toDto).toList();
     }
 
+    @Operation(summary = "Create a new vehicle price", description = "Add a new price for a specific vehicle.")
     @PostMapping("/price")
     @ResponseStatus(HttpStatus.CREATED)
     public VehiclePriceResponse createVehiclePrice(@RequestBody VehiclePriceRequest vehiclePriceRequest) {
@@ -95,6 +109,8 @@ public class VehicleController {
         );
     }
 
+    @Operation(summary = "Update a vehicle price", description = "Update an existing price for a specific vehicle by price ID.")
+    @Parameter(name = "id", description = "The ID of the vehicle price to update.", required = true)
     @PutMapping("/price/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public VehiclePriceResponse updateVehiclePrice(@PathVariable Long id, @RequestBody VehiclePriceRequest vehiclePriceRequest) {
