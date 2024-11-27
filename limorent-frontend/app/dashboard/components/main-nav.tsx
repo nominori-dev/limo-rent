@@ -19,19 +19,19 @@ export function MainNav({
       </Link>
       <Link
         href="/dashboard/customers"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className="text-sm font-medium transition-colors hover:text-primary"
       >
         Klienci
       </Link>
       <Link
         href="/dashboard/fleet"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className="text-sm font-medium transition-colors hover:text-primary"
       >
         Flota
       </Link>
       <Link
         href="/dashboard/manage"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className="text-sm font-medium transition-colors hover:text-primary"
       >
         Zarządzanie stroną
       </Link>
