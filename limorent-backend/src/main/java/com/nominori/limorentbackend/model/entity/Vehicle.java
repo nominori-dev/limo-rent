@@ -23,7 +23,7 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleClass vehicleClass;
 
-    @Column(name = "vehicle_description")
+    @Column(name = "vehicle_description", columnDefinition = "CLOB")
     private String vehicleDescription;
 
     @Column(name = "vehicle_luggage")
