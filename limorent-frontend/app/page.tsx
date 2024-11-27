@@ -1,8 +1,14 @@
 import Hero from "./components/landing/Hero";
 import Fleet from "@/app/components/landing/Fleet";
 import ContactSection from "@/app/contact/components/ContactSection";
+import {VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
+import {getVehicles} from "@/app/dashboard/fleet/actions";
 
-export default function Home() {
+export default async function Home() {
+
+    const vehicles: VehicleResponse[] = await getVehicles();
+
+
   return (
       <main>
           <div>

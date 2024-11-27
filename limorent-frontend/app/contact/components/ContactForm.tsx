@@ -2,18 +2,17 @@
 
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { OfferForm } from "@/app/contact/lib/form.types";
-import { SendForm } from "@/app/contact/lib/contact.service";
+
 import { getWithExpiry, setWithExpire } from "@/app/components/util/kvStorage";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
-import {Select, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from "@/app/components/ui/select";
 import { Card } from "@/app/components/ui/card";
 import { Label } from "@/app/components/ui/label";
 import { Toast } from "@/app/components/ui/toast";
 import {useToast} from "@/app/hooks/use-toast";
-import {SelectContent} from "@radix-ui/react-select";
+import {OfferRequest} from "@/app/dashboard/customers/customer.types";
+import {generateOffer} from "@/app/dashboard/customers/actions";
 
 type Inputs = {
     firstName: string;
@@ -39,7 +38,7 @@ export default function ContactForm() {
             return;
         }
 
-        const form: OfferForm = {
+        const form: OfferRequest = {
             firstName: data.firstName,
             lastName: data.lastName,
             email: data.email,
@@ -48,7 +47,7 @@ export default function ContactForm() {
             vehicleId: data.vehicleId,
         };
 
-        await SendForm(form);
+        await generateOffer(form);
 
         setRequestSend(true);
         toast({
