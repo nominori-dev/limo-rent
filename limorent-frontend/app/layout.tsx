@@ -5,6 +5,7 @@ import Navbar from "@/app/components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import {Toaster} from "@/app/components/ui/toaster";
 import {ToastProvider} from "@/app/components/ui/toast";
+import SessionWrapper from "@/app/components/SessionWrapper";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -28,19 +29,21 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="pl">
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased `}
-        >
-        <div className={"mx-auto max-w-[1440px]"}>
-            <ToastProvider>
-                <Navbar/>
-                {children}
-                <Footer/>
-                <Toaster />
-            </ToastProvider>
-        </div>
-        </body>
-        </html>
+        <SessionWrapper>
+            <html lang="pl">
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+            >
+            <div className={"mx-auto max-w-[1440px]"}>
+                <ToastProvider>
+                    <Navbar/>
+                    {children}
+                    <Footer/>
+                    <Toaster/>
+                </ToastProvider>
+            </div>
+            </body>
+            </html>
+        </SessionWrapper>
     );
 }
