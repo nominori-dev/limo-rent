@@ -12,6 +12,7 @@ import java.util.Date;
 public class PostResponse implements Serializable {
     Long id;
     String title;
+    String category;
     String content;
     String slug;
     String metaTitle;

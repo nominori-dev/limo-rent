@@ -20,6 +20,9 @@ public class Post {
     @Column(name = "post_title")
     private String title;
 
+    @Column(name = "post_category")
+    private String category;
+
     @Column(name = "post_content", columnDefinition = "TEXT")
     private String content; // MDX content stored here
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 
 import { Section, Container } from "@/app/components/craft";
-import { Card, CardContent } from "@/app/components/ui/card";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/app/components/ui/card";
 
 import {
     Carousel,
@@ -11,7 +11,6 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/app/components/ui/carousel";
-import SparklesText from "@/app/components/ui/sparkles-text";
 
 const photos = [
     {
@@ -32,6 +31,8 @@ const photos = [
 ];
 
 import {Coins} from "lucide-react";
+import {Button} from "@/app/components/ui/button";
+import Link from "next/link";
 
 type FeatureText = {
     icon: JSX.Element;
@@ -66,9 +67,7 @@ const Fleet = () => {
             <Container>
                 <h2 className="text-3xl md:text-7xl font-bold dark:text-white text-left">Nasza Flota</h2>
                 <p className="pt-4 text-2xl font-light opacity-70">
-                    Use it to showcase your latest images. Get started at
-                    components.bridgher.to and make sure to install brijr/craft for
-                    styling.
+                    Zaplanuj niezapomniany wieczór z nami! Nasza firma oferuje ekskluzywne wieczory z luksusową limuzyną, które zapewnią Wam nie tylko komfort, ale także niepowtarzalne przeżycia.
                 </p>
                 <Carousel className="mt-6 w-full">
                     <CarouselContent className="-ml-1">
@@ -79,15 +78,24 @@ const Fleet = () => {
                             >
                                 <div className="p-1">
                                     <Card className="relative overflow-hidden">
+                                        <CardHeader>
+                                            <CardTitle>Card Title</CardTitle>
+                                            <CardDescription>Card Description</CardDescription>
+                                        </CardHeader>
                                         <CardContent className="not-prose flex aspect-square items-center justify-center">
                                             <Image
                                                 src={photo.src}
                                                 alt="Presets.com Example Image"
                                                 width={720}
                                                 height={480}
-                                                className="absolute inset-0 h-full w-full object-cover"
+                                                className=" inset-0 h-full w-full object-cover rounded-lg"
                                             ></Image>
                                         </CardContent>
+                                        <CardFooter>
+                                            <Button className="w-full">
+                                                Wybierz ten samochód
+                                            </Button>
+                                        </CardFooter>
                                     </Card>
                                 </div>
                             </CarouselItem>
@@ -96,18 +104,17 @@ const Fleet = () => {
                     <CarouselPrevious />
                     <CarouselNext />
                 </Carousel>
+                <div className={"pt-4 mx-auto text-center"}>
+                    <p className="underline underline-offset-4 text-2xl md:text-4xl link-hover font-semibold text-base-content">
+                        <Link href="/fleet">zobacz całą flotę</Link></p>
+                </div>
             </Container>
             <Container>
                 <div className="flex flex-col gap-6">
-                    <h3 className="text-4xl">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </h3>
-                    <h4 className="text-2xl font-light opacity-70">
-                            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                    </h4>
+
 
                     <div className="mt-6 grid gap-6 md:mt-12 md:grid-cols-3">
-                        {featureText.map(({icon, title, description}, index) => (
+                    {featureText.map(({icon, title, description}, index) => (
                             <div className="flex flex-col gap-4" key={index}>
                                 {icon}
                                 <h4 className="text-xl text-primary">{title}</h4>

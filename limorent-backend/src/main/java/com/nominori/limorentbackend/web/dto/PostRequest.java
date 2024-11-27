@@ -18,14 +18,22 @@ public class PostRequest implements Serializable {
     @NotEmpty(message = "Title can't be empty")
     @NotBlank(message = "Title can't be blank")
     String title;
+
     String content;
+
+    @NotEmpty(message = "Category can't be empty")
+    String category;
+
     @NotEmpty
     @NotBlank
     String slug;
+
     @NotEmpty
     @NotBlank
     String metaTitle;
+
     @NotEmpty
     @NotBlank
     String metaDescription;
+
 }
