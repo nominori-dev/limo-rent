@@ -1,5 +1,6 @@
 package com.nominori.limorentbackend.service.impl;
 
+import com.nominori.limorentbackend.exception.ResourceNotFoundException;
 import com.nominori.limorentbackend.model.dao.VehiclePriceRepository;
 import com.nominori.limorentbackend.model.entity.Vehicle;
 import com.nominori.limorentbackend.model.entity.VehiclePrice;
@@ -36,7 +37,7 @@ public class VehiclePriceServiceImpl implements VehiclePriceService {
     @Override
     public VehiclePrice getById(Long id) {
         return vehiclePriceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("VehiclePrice not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("VehiclePrice not found"));
     }
 
     @Override

@@ -2,12 +2,12 @@ package com.nominori.limorentbackend.web;
 
 import com.nominori.limorentbackend.model.VehicleClass;
 import com.nominori.limorentbackend.model.entity.Vehicle;
+import com.nominori.limorentbackend.model.entity.VehicleImage;
+import com.nominori.limorentbackend.service.VehicleImageService;
 import com.nominori.limorentbackend.service.VehiclePriceService;
 import com.nominori.limorentbackend.service.VehicleService;
-import com.nominori.limorentbackend.web.dto.VehiclePriceRequest;
-import com.nominori.limorentbackend.web.dto.VehiclePriceResponse;
-import com.nominori.limorentbackend.web.dto.VehicleRequest;
-import com.nominori.limorentbackend.web.dto.VehicleResponse;
+import com.nominori.limorentbackend.web.dto.*;
+import com.nominori.limorentbackend.web.mapper.VehicleImageMapper;
 import com.nominori.limorentbackend.web.mapper.VehiclePriceMapper;
 import com.nominori.limorentbackend.web.mapper.VehicleRequestMapper;
 import com.nominori.limorentbackend.web.mapper.VehicleResponseMapper;
@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -33,6 +34,9 @@ public class VehicleController {
 
     private final VehiclePriceService vehiclePriceService;
     private final VehiclePriceMapper priceMapper;
+
+    private final VehicleImageService vehicleImageService;
+    private final VehicleImageMapper imageMapper;
 
     @Operation(summary = "Get all vehicles", description = "Retrieve a list of all available vehicles.")
     @GetMapping
@@ -119,4 +123,45 @@ public class VehicleController {
                 vehiclePriceService.updateVehiclePriceById(id, vehiclePriceRequest.toVehiclePrice(vehicle))
         );
     }
+
+    @GetMapping("/image")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VehicleImageResponse> getVehicleImages() {
+        return vehicleImageService.getAllVehicleImages()
+                .stream()
+                .map(imageMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}/image")
+    @ResponseStatus(HttpStatus.OK)
+    public List<VehicleImageResponse> getVehicleImagesByVehicleId(@PathVariable Long id) {
+        Vehicle vehicle = vehicleService.getById(id);
+        return vehicleImageService.getByVehicle(vehicle)
+                .stream()
+                .map(imageMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/image/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public VehicleImageResponse getVehicleImageById(@PathVariable Long id) {
+        return imageMapper.toDto(vehicleImageService.getById(id));
+    }
+
+    @PostMapping("/image")
+    @ResponseStatus(HttpStatus.CREATED)
+    public VehicleImageResponse createVehicleImage(@RequestBody VehicleImageRequest vehicleImageRequest) {
+        Vehicle vehicle = vehicleService.getById(vehicleImageRequest.getVehicleId());
+        VehicleImage vehicleImage = vehicleImageRequest.toVehicleImage(vehicle);
+
+        return imageMapper.toDto(vehicleImageService.addVehicleImage(vehicleImage));
+    }
+
+    @DeleteMapping("/image/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteVehicleImage(@PathVariable Long id) {
+        vehicleImageService.deleteById(id);
+    }
+
 }
