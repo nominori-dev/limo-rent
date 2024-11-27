@@ -1,5 +1,6 @@
 package com.nominori.limorentbackend.service.impl;
 
+import com.nominori.limorentbackend.exception.ResourceNotFoundException;
 import com.nominori.limorentbackend.model.dao.CustomerRepository;
 import com.nominori.limorentbackend.model.entity.Customer;
 import com.nominori.limorentbackend.model.entity.Vehicle;
@@ -38,8 +39,31 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setLastName(offerRequest.getLastName());
         customer.setEmail(offerRequest.getEmail());
         customer.setPhoneNumber(offerRequest.getPhoneNumber());
+        customer.setSpecialRequests(offerRequest.getSpecialRequests());
+        customer.setSelectedVehicle(vehicle);
 
         return customerRepository.save(customer);
+    }
+
+    @Override
+    public List<Customer> getCustomers() {
+        return customerRepository.findAll();
+    }
+
+    @Override
+    public Customer getCustomerById(long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with provided ID not found."));
+    }
+
+    @Override
+    public List<Customer> getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        customerRepository.deleteById(id);
     }
 
 

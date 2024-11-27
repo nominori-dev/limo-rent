@@ -34,7 +34,7 @@ public class Customer {
     @JoinColumn(name = "vehicle_id")
     private Vehicle selectedVehicle;
 
-    @Column(name = "generated_offer")
+    @Column(name = "generated_offer", columnDefinition = "CLOB")
     private String generatedOffer;
 
 }
