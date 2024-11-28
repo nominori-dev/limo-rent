@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Value
 public class VehicleImageResponse implements Serializable {
     Long id;
-    VehicleResponse vehicle;
+    Long vehicleId;
     ImageType imageType;
     String imageUrl;
     String imageAlt;

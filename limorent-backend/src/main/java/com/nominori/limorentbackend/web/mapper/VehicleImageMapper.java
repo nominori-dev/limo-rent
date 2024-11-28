@@ -8,6 +8,7 @@ import org.mapstruct.*;
 public interface VehicleImageMapper {
     VehicleImage toEntity(VehicleImageResponse vehicleImageResponse);
 
+    @Mapping(target = "vehicleId", source = "vehicle.id")
     VehicleImageResponse toDto(VehicleImage vehicleImage);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
