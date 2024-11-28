@@ -33,6 +33,8 @@ const photos = [
 import {Coins} from "lucide-react";
 import {Button} from "@/app/components/ui/button";
 import Link from "next/link";
+import {VehicleImageResponse, VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
+import {getImagesByVehicleId, getVehicleImages, getVehicles} from "@/app/dashboard/fleet/actions";
 
 type FeatureText = {
     icon: JSX.Element;
@@ -61,17 +63,19 @@ const featureText: FeatureText[] = [
     },
 ];
 
-const Fleet = () => {
+
+const Fleet = async () => {
+
+    const vehicles: VehicleResponse[] = await getVehicles();
+    const vehiclesImages: VehicleImageResponse[] = await getVehicleImages();
+
+
     return (
         <Section id={"fleet-section"}>
             <Container>
-                <h2 className="text-3xl md:text-7xl font-bold dark:text-white text-left">Nasza Flota</h2>
-                <p className="pt-4 text-2xl font-light opacity-70">
-                    Zaplanuj niezapomniany wieczór z nami! Nasza firma oferuje ekskluzywne wieczory z luksusową limuzyną, które zapewnią Wam nie tylko komfort, ale także niepowtarzalne przeżycia.
-                </p>
-                <Carousel className="mt-6 w-full">
+                <Carousel className="w-full">
                     <CarouselContent className="-ml-1">
-                        {photos.map((photo, index) => (
+                        {vehicles.map((vehicle, index) => (
                             <CarouselItem
                                 key={index}
                                 className="pl-1 md:basis-1/2 lg:basis-1/3"
@@ -79,22 +83,24 @@ const Fleet = () => {
                                 <div className="p-1">
                                     <Card className="relative overflow-hidden">
                                         <CardHeader>
-                                            <CardTitle>Card Title</CardTitle>
-                                            <CardDescription>Card Description</CardDescription>
+                                            <CardTitle>{vehicle.vehicleName}</CardTitle>
+                                            <CardDescription>Rodzaj samochodu: {vehicle.vehicleClass}</CardDescription>
                                         </CardHeader>
                                         <CardContent className="not-prose flex aspect-square items-center justify-center">
                                             <Image
-                                                src={photo.src}
-                                                alt="Presets.com Example Image"
+                                                src={vehiclesImages.find(image => image.imageType === "MAIN" && image.vehicleId == vehicle.id)!.imageUrl}
+                                                alt={vehiclesImages.find(image => image.imageType === "MAIN" && image.vehicleId == vehicle.id)!.imageAlt}
                                                 width={720}
                                                 height={480}
                                                 className=" inset-0 h-full w-full object-cover rounded-lg"
                                             ></Image>
                                         </CardContent>
-                                        <CardFooter>
-                                            <Button className="w-full">
-                                                Wybierz ten samochód
-                                            </Button>
+                                        <CardFooter className={"text-center"}>
+                                            <Link href={`/fleet/${vehicle.id}`}>
+                                                <Button className="w-full">
+                                                    Zobacz ofertę samochodu
+                                                </Button>
+                                            </Link>
                                         </CardFooter>
                                     </Card>
                                 </div>

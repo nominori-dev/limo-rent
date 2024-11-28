@@ -14,7 +14,7 @@ import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Table
 import Link from "next/link";
 import markdownToHtml from "@/app/components/mdx/lib/mdxToHtml";
 
-export default async function VehiclePage({
+export default async function LandingVehiclePage({
                                               params,
                                           }: {
     params: Promise<{ id: number }>
@@ -28,19 +28,10 @@ export default async function VehiclePage({
     const content = await markdownToHtml(vehicle.vehicleDescription || "");
 
     return (
-        <div className={"pt-10"}>
-            <div className="border-b">
-                <div className="flex h-16 items-center px-4">
-                    <MainNav className="mx-6"/>
-                    <div className="ml-auto flex items-center space-x-4">
-                        <Search/>
-                        <UserNav/>
-                    </div>
-                </div>
-            </div>
+        <div className={""}>
             <div className="flex-1 space-y-4 p-8 pt-6">
                 <div className="flex items-center justify-between space-y-2">
-                    <Link href={"/dashboard/fleet"}><Button className={"tracking-tight"}>Wróć do zarządzania flotą</Button></Link>
+                    <Link href={"/"}><Button className={"tracking-tight"}>Wróć na główną</Button></Link>
                     <div className="flex items-center space-x-2">
                         <Button>Pobierz ofertę</Button>
                     </div>
@@ -176,7 +167,6 @@ export default async function VehiclePage({
                                 <TableHead className={"text-center"}>ID</TableHead>
                                 <TableHead className={"text-center"}>Tytuł</TableHead>
                                 <TableHead className={"text-center"}>Cena</TableHead>
-                                <TableHead className={"text-center"}>Akcje</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -191,12 +181,6 @@ export default async function VehiclePage({
                                         </TableCell>
                                         <TableCell>
                                             {price.price / 100} zł
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className={"space-x-2"}>
-                                                <Button>Zmień</Button>
-                                                <Button variant={"destructive"}>Usuń</Button>
-                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))

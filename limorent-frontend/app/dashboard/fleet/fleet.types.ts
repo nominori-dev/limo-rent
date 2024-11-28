@@ -38,7 +38,7 @@ export interface VehicleImageRequest {
 
 export interface VehicleImageResponse {
     id: number;
-    vehicle: VehicleResponse;
+    vehicleId: number;
     imageType: "MAIN" | "GALLERY";
     imageUrl: string;
     imageAlt?: string;

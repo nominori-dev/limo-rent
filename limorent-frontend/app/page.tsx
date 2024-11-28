@@ -3,6 +3,7 @@ import Fleet from "@/app/components/landing/Fleet";
 import ContactSection from "@/app/contact/components/ContactSection";
 import {VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
 import {getVehicles} from "@/app/dashboard/fleet/actions";
+import * as React from "react";
 
 export default async function Home() {
 
@@ -13,10 +14,27 @@ export default async function Home() {
       <main>
           <div>
               <Hero/>
-              <Fleet/>
+              <div className={"offer-section"}>
+                  <h2 className="bg-clip-text text-transparent text-left bg-gradient-to-b from-neutral-900 to-neutral-700 text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">
+                      Oferta
+                  </h2>
+              </div>
+              <div>
+                  <h2 className="bg-clip-text text-transparent text-left bg-gradient-to-b from-neutral-900 to-neutral-700 text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">Nasza Flota</h2>
+                  <p className="pt-4 text-2xl font-light opacity-70">
+                      Zaplanuj niezapomniany wieczór z nami! Nasza firma oferuje ekskluzywne wieczory z luksusową
+                      limuzyną, które zapewnią Wam nie tylko komfort, ale także niepowtarzalne przeżycia.
+                  </p>
+                  <Fleet/>
+              </div>
               <div>
                   <h2 className="bg-clip-text text-transparent text-left bg-gradient-to-b from-neutral-900 to-neutral-700 text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">
-                     Rezerwacja
+                      Aktualności
+                  </h2>
+              </div>
+              <div>
+                  <h2 className="bg-clip-text text-transparent text-left bg-gradient-to-b from-neutral-900 to-neutral-700 text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">
+                      Rezerwacja
                   </h2>
                   <ContactSection/>
               </div>

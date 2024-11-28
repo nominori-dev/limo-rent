@@ -47,6 +47,20 @@ export async function getImagesByVehicleId(id: number): Promise<any> {
     }
 }
 
+export async function getVehicleImages(): Promise<any> {
+    try {
+        const response = await fetch(`${BASE_URL}/api/vehicle/image`, {
+            method: "GET",
+        });
+
+        return await response.json();
+    } catch (error) {
+        console.error(`Error fetching vehicle by id from API: ${error}`);
+        throw error;
+    }
+}
+
+
 export async function getPriceByVehicleId(id: number): Promise<any> {
     try {
         const response = await fetch(`${BASE_URL}/api/vehicle/${id}/price`, {
