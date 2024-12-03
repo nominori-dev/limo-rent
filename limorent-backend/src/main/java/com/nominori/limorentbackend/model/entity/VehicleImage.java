@@ -3,6 +3,7 @@ package com.nominori.limorentbackend.model.entity;
 import com.nominori.limorentbackend.model.ImageType;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "vehicle_image")
+@NoArgsConstructor
 public class VehicleImage {
 
     @Id
@@ -31,4 +33,10 @@ public class VehicleImage {
     @Column(name = "image_alt")
     private String imageAlt;
 
+    public VehicleImage(Vehicle vehicle, ImageType imageType, String imageUrl, String imageAlt) {
+        this.vehicle = vehicle;
+        this.imageType = imageType;
+        this.imageUrl = imageUrl;
+        this.imageAlt = imageAlt;
+    }
 }

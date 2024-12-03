@@ -3,12 +3,14 @@ package com.nominori.limorentbackend.model.entity;
 import com.nominori.limorentbackend.model.VehicleClass;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "vehicle")
+@NoArgsConstructor
 public class Vehicle {
 
     @Id
@@ -32,4 +34,11 @@ public class Vehicle {
     @Column(name = "vehicle_passenger")
     private Long vehiclePassenger;
 
+    public Vehicle(String vehicleName, VehicleClass vehicleClass, String vehicleDescription, Long vehicleLuggage, Long vehiclePassenger) {
+        this.vehicleName = vehicleName;
+        this.vehicleClass = vehicleClass;
+        this.vehicleDescription = vehicleDescription;
+        this.vehicleLuggage = vehicleLuggage;
+        this.vehiclePassenger = vehiclePassenger;
+    }
 }

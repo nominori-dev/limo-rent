@@ -2,12 +2,14 @@ package com.nominori.limorentbackend.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "vehicle_price")
+@NoArgsConstructor
 public class VehiclePrice {
 
     @Id
@@ -25,4 +27,9 @@ public class VehiclePrice {
     @Column(name = "price", nullable = false)
     private Long price;
 
+    public VehiclePrice(Vehicle vehicle, String priceTitle, Long price) {
+        this.vehicle = vehicle;
+        this.priceTitle = priceTitle;
+        this.price = price;
+    }
 }

@@ -30,51 +30,51 @@ public class LimorentBackendApplication {
 
 
     @EventListener(ApplicationReadyEvent.class)
-    public void doSomethingAfterStartup() {
-        Vehicle vehicle = new Vehicle();
-        vehicle.setVehiclePassenger(2L);
-        vehicle.setVehicleLuggage(4L);
-        vehicle.setVehicleName("Bentley Bentayga 2024");
-        vehicle.setVehicleClass(VehicleClass.LUXURY);
-        vehicle.setVehicleDescription("<h1> Standardowe wyposażenie pojazdu obejmuje m.in. system ABS i ESP, elektryczne sterowanie szyb, elektryczne sterowanie lusterek, 8-calowy ekran dotykowy systemu multimedialnego, połączenie z internetem, pokładowy dysk twardy o pojemności 60 GB, wielofunkcyjną kierownicę, klimatyzację automatyczną, wyświetlacz HUD, pokrętło do wybrania trybu jazdy, regulację prześwitu pneumatycznego zawieszenia, skórzaną tapicerkę, przednie fotele z funkcją masażu, podgrzewania, wentylacji, a także 22-stopniowej regulacji oraz dwa 10-calowe tablety dla pasażerów z systemem Android[4], asystenta utrzymywania pasa ruchu i aktywny tempomat, a także 20-calowe alufelgi i 18-głośnikowy system audio Naim o łącznej mocy 1950 watów </h1>");
+    public void initializeDemoData() {
+        for (int i = 1; i <= 4; i++) {
+            // Create Vehicle instance using the new constructor
+            Vehicle vehicle = new Vehicle(
+                    "Bentley Bentayga 2024",
+                    VehicleClass.LUXURY,
+                    "<h1>Standardowe wyposażenie pojazdu obejmuje m.in. system ABS i ESP, elektryczne sterowanie szyb, elektryczne sterowanie lusterek, 8-calowy ekran dotykowy systemu multimedialnego, połączenie z internetem, pokładowy dysk twardy o pojemności 60 GB, wielofunkcyjną kierownicę, klimatyzację automatyczną, wyświetlacz HUD, pokrętło do wybrania trybu jazdy, regulację prześwitu pneumatycznego zawieszenia, skórzaną tapicerkę, przednie fotele z funkcją masażu, podgrzewania, wentylacji, a także 22-stopniowej regulacji oraz dwa 10-calowe tablety dla pasażerów z systemem Android[4], asystenta utrzymywania pasa ruchu i aktywny tempomat, a także 20-calowe alufelgi i 18-głośnikowy system audio Naim o łącznej mocy 1950 watów</h1>",
+                    4L,
+                    2L
+            );
+            vehicle = vehicleService.add(vehicle);
 
-        vehicle = vehicleService.add(vehicle);
-        VehiclePrice price = new VehiclePrice();
-        price.setVehicle(vehicle);
-        price.setPriceTitle("Godzina (hour)");
-        price.setPrice(30000L);
+            // Create VehiclePrice instances using the new constructor
+            VehiclePrice price1 = new VehiclePrice(vehicle, "Godzina (hour)", 30000L);
+            VehiclePrice price2 = new VehiclePrice(vehicle, "Kilometry", 7500L);
 
-        VehiclePrice price2 = new VehiclePrice();
-        price2.setVehicle(vehicle);
-        price2.setPriceTitle("Kilometry");
-        price2.setPrice(7500L);
+            vehiclePriceService.addVehiclePrice(price1);
+            vehiclePriceService.addVehiclePrice(price2);
 
-        vehiclePriceService.addVehiclePrice(price);
-        vehiclePriceService.addVehiclePrice(price2);
+            // Create VehicleImage instances using the new constructor
+            VehicleImage mainImage = new VehicleImage(
+                    vehicle,
+                    ImageType.MAIN,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Bentley_Bentayga_V8_%28FL%29_IMG_4122.jpg/1920px-Bentley_Bentayga_V8_%28FL%29_IMG_4122.jpg",
+                    "Bentayga Przód"
+            );
 
-        VehicleImage mainImage = new VehicleImage();
-        mainImage.setVehicle(vehicle);
-        mainImage.setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Bentley_Bentayga_V8_%28FL%29_IMG_4122.jpg/1920px-Bentley_Bentayga_V8_%28FL%29_IMG_4122.jpg");
-        mainImage.setImageAlt("Bentayga Przód");
-        mainImage.setImageType(ImageType.MAIN);
+            VehicleImage secondaryImage1 = new VehicleImage(
+                    vehicle,
+                    ImageType.GALLERY,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bentley_Bentayga_Diesel_%E2%80%93_Heckansicht%2C_24._Juni_2017%2C_D%C3%BCsseldorf.jpg/1920px-Bentley_Bentayga_Diesel_%E2%80%93_Heckansicht%2C_24._Juni_2017%2C_D%C3%BCsseldorf.jpg",
+                    "Bentayga Tył"
+            );
 
-        VehicleImage secondaryImage = new VehicleImage();
-        secondaryImage.setVehicle(vehicle);
-        secondaryImage.setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bentley_Bentayga_Diesel_%E2%80%93_Heckansicht%2C_24._Juni_2017%2C_D%C3%BCsseldorf.jpg/1920px-Bentley_Bentayga_Diesel_%E2%80%93_Heckansicht%2C_24._Juni_2017%2C_D%C3%BCsseldorf.jpg");
-        secondaryImage.setImageAlt("Bentayga Tył");
-        secondaryImage.setImageType(ImageType.GALLERY);
+            VehicleImage secondaryImage2 = new VehicleImage(
+                    vehicle,
+                    ImageType.GALLERY,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Bentley_Bentayga_V8_%28FL%29_IMG_4117.jpg/1920px-Bentley_Bentayga_V8_%28FL%29_IMG_4117.jpg",
+                    "Bentayga Tył 2"
+            );
 
-        VehicleImage secondaryImage2 = new VehicleImage();
-        secondaryImage2.setVehicle(vehicle);
-        secondaryImage2.setImageType(ImageType.GALLERY);
-        secondaryImage2.setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Bentley_Bentayga_V8_%28FL%29_IMG_4117.jpg/1920px-Bentley_Bentayga_V8_%28FL%29_IMG_4117.jpg");
-        secondaryImage2.setImageAlt("Bentayga Tył 2");
-
-        vehicleImageService.addVehicleImage(mainImage);
-        vehicleImageService.addVehicleImage(secondaryImage);
-        vehicleImageService.addVehicleImage(secondaryImage2);
-
-
+            vehicleImageService.addVehicleImage(mainImage);
+            vehicleImageService.addVehicleImage(secondaryImage1);
+            vehicleImageService.addVehicleImage(secondaryImage2);
+        }
     }
 
 }
