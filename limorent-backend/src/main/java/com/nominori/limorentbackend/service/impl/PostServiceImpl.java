@@ -55,4 +55,9 @@ public class PostServiceImpl implements PostService {
         return postRepository.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException("Post by provided ID is not found"));
     }
+
+    @Override
+    public List<Post> getPostsByCategory(String category) {
+        return postRepository.findByCategory(category);
+    }
 }

@@ -46,12 +46,23 @@ public class PostController {
     )
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PostResponse> getPosts() {
-        return postService.getAllPosts()
-                .stream()
-                .map(responseMapper::toDto)
-                .collect(Collectors.toList());
+    public List<PostResponse> getPosts(@RequestParam(required = false) String category) {
+
+        if(category == null) {
+            return postService.getAllPosts()
+                    .stream()
+                    .map(responseMapper::toDto)
+                    .toList();
+        } else {
+            return postService.getPostsByCategory(category)
+                    .stream()
+                    .map(responseMapper::toDto)
+                    .toList();
+        }
+
     }
+
+
 
     @Operation(
             summary = "Get a post by slug",

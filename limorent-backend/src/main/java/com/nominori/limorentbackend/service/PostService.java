@@ -2,6 +2,7 @@ package com.nominori.limorentbackend.service;
 
 import com.nominori.limorentbackend.model.entity.Post;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,6 @@ public interface PostService {
     void deletePost(Long id);
 
     Post getPostBySlug(String slug);
+
+    List<Post> getPostsByCategory(String category);
 }
