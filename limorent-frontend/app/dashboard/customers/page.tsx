@@ -1,13 +1,9 @@
 import {Button} from "@/app/components/ui/button"
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/app/components/ui/card"
 import {Tabs, TabsContent} from "@/app/components/ui/tabs"
 import {Metadata} from "next";
-import {Search} from "../components/search";
 import {MainNav} from "../components/main-nav";
-import {CalendarDateRangePicker} from "@/app/dashboard/components/date-range-picker";
 import {UserNav} from "@/app/dashboard/components/user-nav";
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
-import {redirect} from "next/navigation";
 import Link from "next/link";
 import {CustomerResponse} from "@/app/dashboard/customers/customer.types";
 import {getCustomers} from "@/app/dashboard/customers/actions";
@@ -26,7 +22,6 @@ export default async function CustomersPage() {
                 <div className="flex h-16 items-center px-4">
                     <MainNav className="mx-6"/>
                     <div className="ml-auto flex items-center space-x-4">
-                        <Search/>
                         <UserNav/>
                     </div>
                 </div>
@@ -35,7 +30,6 @@ export default async function CustomersPage() {
                 <div className="flex items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">Zarządzanie klientami</h2>
                     <div className="flex items-center space-x-2">
-                        <CalendarDateRangePicker/>
                         <Button>Pobierz listę</Button>
                     </div>
                 </div>

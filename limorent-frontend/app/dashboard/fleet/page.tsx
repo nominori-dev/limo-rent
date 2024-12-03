@@ -9,7 +9,6 @@ import {UserNav} from "@/app/dashboard/components/user-nav";
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
 import {VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
 import {getVehicles} from "@/app/dashboard/fleet/actions";
-import {redirect} from "next/navigation";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -27,7 +26,6 @@ export default async function FleetPage() {
                 <div className="flex h-16 items-center px-4">
                     <MainNav className="mx-6"/>
                     <div className="ml-auto flex items-center space-x-4">
-                        <Search/>
                         <UserNav/>
                     </div>
                 </div>
@@ -36,7 +34,6 @@ export default async function FleetPage() {
                 <div className="flex items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">Zarządzanie flotą</h2>
                     <div className="flex items-center space-x-2">
-                        <CalendarDateRangePicker/>
                         <Button>Pobierz listę</Button>
                     </div>
                 </div>

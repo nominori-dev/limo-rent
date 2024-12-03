@@ -12,24 +12,6 @@ import {
     CarouselPrevious,
 } from "@/app/components/ui/carousel";
 
-const photos = [
-    {
-        src: "https://images.unsplash.com/photo-1676107746494-61af7d8673ca?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1705682433884-f5ec3c3f979b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1632548260498-b7246fa466ea?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1676107648535-931375db52e2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-        src: "https://images.unsplash.com/photo-1720887236665-43caad593cdf?q=80&w=1836&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-];
-
 import {Coins} from "lucide-react";
 import {Button} from "@/app/components/ui/button";
 import Link from "next/link";
@@ -89,7 +71,7 @@ const Fleet = async () => {
                                         <CardContent className="not-prose flex aspect-square items-center justify-center">
                                             <Image
                                                 src={vehiclesImages.find(image => image.imageType === "MAIN" && image.vehicleId == vehicle.id)!.imageUrl}
-                                                alt={vehiclesImages.find(image => image.imageType === "MAIN" && image.vehicleId == vehicle.id)!.imageAlt}
+                                                alt={vehiclesImages.find(image => image.imageType === "MAIN" && image.vehicleId == vehicle.id)!.imageAlt || ""}
                                                 width={720}
                                                 height={480}
                                                 className=" inset-0 h-full w-full object-cover rounded-lg"

@@ -1,12 +1,7 @@
 import {Button} from "../components/ui/button"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "../components/ui/card"
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "../components/ui/tabs"
-import Image from "next/image";
-import {Metadata} from "next";
-import TeamSwitcher from "./components/team-switcher";
-import {Search} from "./components/search";
+import {Tabs, TabsContent} from "../components/ui/tabs"
 import {MainNav} from "./components/main-nav";
-import {CalendarDateRangePicker} from "@/app/dashboard/components/date-range-picker";
 import {UserNav} from "@/app/dashboard/components/user-nav";
 import {Overview} from "./components/overview";
 import {RecentSales} from "./components/recent-sales";
@@ -15,10 +10,6 @@ import {getCustomers} from "@/app/dashboard/customers/actions";
 import {VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
 import {getVehicles} from "@/app/dashboard/fleet/actions";
 
-export const metadata: Metadata = {
-    title: "Dashboard",
-    description: "Example dashboard app built using the components.",
-}
 
 export default async function DashboardPage() {
 
@@ -31,7 +22,6 @@ export default async function DashboardPage() {
                 <div className="flex h-16 items-center px-4">
                     <MainNav className="mx-6"/>
                     <div className="ml-auto flex items-center space-x-4">
-                        <Search/>
                         <UserNav/>
                     </div>
                 </div>
@@ -40,7 +30,6 @@ export default async function DashboardPage() {
                 <div className="flex items-center justify-between space-y-2">
                     <h2 className="text-3xl font-bold tracking-tight">Panel administracyjny</h2>
                     <div className="flex items-center space-x-2">
-                        <CalendarDateRangePicker/>
                         <Button>Pobierz raport</Button>
                     </div>
                 </div>

@@ -1,9 +1,7 @@
 import {Button} from "@/app/components/ui/button"
 import {Tabs, TabsContent} from "@/app/components/ui/tabs"
 import {Metadata} from "next";
-import {Search} from "../components/search";
 import {MainNav} from "../components/main-nav";
-import {CalendarDateRangePicker} from "@/app/dashboard/components/date-range-picker";
 import {UserNav} from "@/app/dashboard/components/user-nav";
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
 import Link from "next/link";
@@ -25,7 +23,6 @@ export default async function ServicesPostsPage() {
                 <div className="flex h-16 items-center px-4">
                     <MainNav className="mx-6"/>
                     <div className="ml-auto flex items-center space-x-4">
-                        <Search/>
                         <UserNav/>
                     </div>
                 </div>
