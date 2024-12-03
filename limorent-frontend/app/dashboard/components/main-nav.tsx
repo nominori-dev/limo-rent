@@ -30,10 +30,10 @@ export function MainNav({
         Flota
       </Link>
       <Link
-        href="/dashboard/manage"
+        href="/dashboard/services"
         className="text-sm font-medium transition-colors hover:text-primary"
       >
-        Zarządzanie stroną
+        Usługi
       </Link>
     </nav>
   )

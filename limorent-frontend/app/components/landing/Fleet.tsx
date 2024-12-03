@@ -34,7 +34,7 @@ import {Coins} from "lucide-react";
 import {Button} from "@/app/components/ui/button";
 import Link from "next/link";
 import {VehicleImageResponse, VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
-import {getImagesByVehicleId, getVehicleImages, getVehicles} from "@/app/dashboard/fleet/actions";
+import {getVehicleImages, getVehicles} from "@/app/dashboard/fleet/actions";
 
 type FeatureText = {
     icon: JSX.Element;

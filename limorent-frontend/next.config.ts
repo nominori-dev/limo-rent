@@ -1,8 +1,9 @@
+
 import type { NextConfig } from "next";
 import createMDX from '@next/mdx';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    /* config options here */
     images: {
         remotePatterns: [
             {
@@ -11,7 +12,8 @@ const nextConfig: NextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'upload.wikimedia.org'
+                hostname: 'upload.wikimedia.org',
+                pathname: '**'
             }
         ]
     },
