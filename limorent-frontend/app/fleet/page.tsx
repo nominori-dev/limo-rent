@@ -1,4 +1,5 @@
 import {Metadata} from "next";
+import FleetSection from "@/app/fleet/components/FleetSection";
 
 export const metadata: Metadata = {
     title: "Dashboard",
@@ -8,8 +9,10 @@ export const metadata: Metadata = {
 export default async function LandingFleetPage() {
 
     return (
-        <div className="flex-col md:flex">
-
+        <div className={"px-10 sm:px-32 pb-20 pt-10"}>
+            <div>
+                <FleetSection/>
+            </div>
         </div>
     )
 }

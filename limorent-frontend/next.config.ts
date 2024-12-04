@@ -7,14 +7,9 @@ const nextConfig: NextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'https',
-                hostname: 'images.unsplash.com',
+                protocol: "https",
+                hostname: "**",
             },
-            {
-                protocol: 'https',
-                hostname: 'upload.wikimedia.org',
-                pathname: '**'
-            }
         ]
     },
     pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
