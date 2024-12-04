@@ -72,6 +72,8 @@ export async function addBlogPost(body: PostRequest): Promise<any> {
 
 export async function deletePostById(id: number): Promise<any> {
     try {
+        revalidateTag("blog")
+        revalidateTag("services")
         await fetch(`${BASE_URL}/api/post/${id}`, {
             method: "DELETE",
         });
