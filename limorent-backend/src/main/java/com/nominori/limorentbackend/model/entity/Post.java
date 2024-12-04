@@ -2,6 +2,7 @@ package com.nominori.limorentbackend.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "post")
+@NoArgsConstructor
 public class Post {
 
     @Id
@@ -39,5 +41,13 @@ public class Post {
     @Column(name = "post_created_at")
     private Date createdAt = new Date();
 
+    public Post(String title, String category, String content, String slug, String metaTitle, String metaDescription) {
+        this.title = title;
+        this.category = category;
+        this.content = content;
+        this.slug = slug;
+        this.metaTitle = metaTitle;
+        this.metaDescription = metaDescription;
+    }
 }
 
