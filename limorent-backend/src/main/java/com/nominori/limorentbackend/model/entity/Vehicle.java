@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -33,6 +36,12 @@ public class Vehicle {
 
     @Column(name = "vehicle_passenger")
     private Long vehiclePassenger;
+
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VehicleImage> images = new ArrayList<>();
+
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VehiclePrice> prices = new ArrayList<>();
 
     public Vehicle(String vehicleName, VehicleClass vehicleClass, String vehicleDescription, Long vehicleLuggage, Long vehiclePassenger) {
         this.vehicleName = vehicleName;

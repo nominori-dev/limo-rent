@@ -24,20 +24,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/vehicle")
 @RequiredArgsConstructor
-@Tag(name = "Vehicle API", description = "API for managing vehicles and their pricing.")
+@Tag(name = "Vehicle API", description = "API for managing vehicles.")
 public class VehicleController {
 
     private final VehicleService vehicleService;
     private final VehicleResponseMapper responseMapper;
     private final VehicleRequestMapper requestMapper;
 
-    private final VehiclePriceService vehiclePriceService;
-    private final VehiclePriceMapper priceMapper;
-
-    private final VehicleImageService vehicleImageService;
-    private final VehicleImageMapper imageMapper;
-
-    // Vehicles
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<VehicleResponse> getAllVehicles() {
@@ -71,91 +64,9 @@ public class VehicleController {
         return responseMapper.toDto(vehicleService.update(id, vehicle));
     }
 
-    // Prices
-    @GetMapping("/price")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public List<VehiclePriceResponse> getAllVehiclePrices() {
-        return vehiclePriceService.getAllVehiclePrices().stream().map(priceMapper::toDto).toList();
-    }
-
-    @GetMapping("/price/{priceId}")
-    @ResponseStatus(HttpStatus.OK)
-    public VehiclePriceResponse getVehiclePriceById(@PathVariable Long priceId) {
-        return priceMapper.toDto(vehiclePriceService.getById(priceId));
-    }
-
-    @GetMapping("/{id}/price")
-    @ResponseStatus(HttpStatus.OK)
-    public List<VehiclePriceResponse> getVehiclePriceByVehicleId(@PathVariable Long id) {
-        Vehicle vehicle = vehicleService.getById(id);
-        return vehiclePriceService.getByVehicle(vehicle).stream().map(priceMapper::toDto).toList();
-    }
-
-    @PostMapping("/price")
-    @ResponseStatus(HttpStatus.CREATED)
-    public VehiclePriceResponse createVehiclePrice(@RequestBody VehiclePriceRequest vehiclePriceRequest) {
-        Vehicle vehicle = vehicleService.getById(vehiclePriceRequest.getVehicleId());
-        return priceMapper.toDto(
-                vehiclePriceService.addVehiclePrice(vehiclePriceRequest.toVehiclePrice(vehicle))
-        );
-    }
-
-    @PutMapping("/price/{priceId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public VehiclePriceResponse updateVehiclePrice(@PathVariable Long priceId, @RequestBody VehiclePriceRequest vehiclePriceRequest) {
-        Vehicle vehicle = vehicleService.getById(vehiclePriceRequest.getVehicleId());
-        return priceMapper.toDto(
-                vehiclePriceService.updateVehiclePriceById(priceId, vehiclePriceRequest.toVehiclePrice(vehicle))
-        );
-    }
-
-    // Images
-    @GetMapping("/{id}/images")
-    @ResponseStatus(HttpStatus.OK)
-    public List<VehicleImageResponse> getVehicleImagesByVehicleId(@PathVariable Long id) {
-        Vehicle vehicle = vehicleService.getById(id);
-        return vehicleImageService.getByVehicle(vehicle)
-                .stream()
-                .map(imageMapper::toDto)
-                .toList();
-    }
-
-    @GetMapping("/image")
-    @ResponseStatus(HttpStatus.OK)
-    public List<VehicleImageResponse> getAllVehicleImages() {
-        return vehicleImageService.getAllVehicleImages()
-                .stream()
-                .map(imageMapper::toDto)
-                .toList();
-    }
-
-    @GetMapping("/image/{imageId}")
-    @ResponseStatus(HttpStatus.OK)
-    public VehicleImageResponse getVehicleImageById(@PathVariable Long imageId) {
-        return imageMapper.toDto(vehicleImageService.getById(imageId));
-    }
-
-    @PostMapping("/image")
-    @ResponseStatus(HttpStatus.CREATED)
-    public VehicleImageResponse createVehicleImage(@RequestBody VehicleImageRequest vehicleImageRequest) {
-        Vehicle vehicle = vehicleService.getById(vehicleImageRequest.getVehicleId());
-        VehicleImage vehicleImage = vehicleImageRequest.toVehicleImage(vehicle);
-
-        return imageMapper.toDto(vehicleImageService.addVehicleImage(vehicleImage));
-    }
-
-    @PutMapping("/image/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public VehicleImageResponse updateVehicleImage(@PathVariable Long id, @RequestBody VehicleImageRequest vehicleImageRequest){
-        Vehicle vehicle = vehicleService.getById(vehicleImageRequest.getVehicleId());
-        VehicleImage vehicleImage = vehicleImageRequest.toVehicleImage(vehicle);
-
-        return imageMapper.toDto(vehicleImageService.updateVehicleImage(id, vehicleImage));
-    }
-
-    @DeleteMapping("/image/{imageId}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteVehicleImage(@PathVariable Long imageId) {
-        vehicleImageService.deleteById(imageId);
+    public void removeVehicle(@PathVariable Long id) {
+        vehicleService.deleteById(id);
     }
 }
