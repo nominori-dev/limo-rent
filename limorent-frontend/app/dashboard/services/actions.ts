@@ -1,6 +1,7 @@
 "use server"
 
 import {PostRequest} from "@/app/dashboard/services/services.types";
+import {revalidateTag} from "next/cache";
 
 const BASE_URL: string = process.env.API_URL!;
 
@@ -16,7 +17,7 @@ export async function getServicesPosts(): Promise<any> {
         
         return await response.json();
     } catch (error) {
-        console.error(`Error fetching vehicles from API: ${error}`);
+        console.error(`Error fetching service posts from API: ${error}`);
         throw error;
     }
 }
@@ -30,7 +31,7 @@ export async function getPostBySlug(slug: string): Promise<any> {
 
         return await response.json();
     } catch (error) {
-        console.error(`Error fetching vehicle by id from API: ${error}`);
+        console.error(`Error fetching service by slug from API: ${error}`);
         console.error(`ID: ${slug}`)
         throw error;
     }
@@ -38,7 +39,7 @@ export async function getPostBySlug(slug: string): Promise<any> {
 
 export async function updateServiceById(id: number, body: PostRequest): Promise<any> {
     try {
-        console.log(BASE_URL)
+        revalidateTag("services")
         const response = await fetch(`${BASE_URL}/api/post/${id}`, {
             method: "PUT",
             body: JSON.stringify(body),
@@ -55,7 +56,7 @@ export async function updateServiceById(id: number, body: PostRequest): Promise<
 
 export async function addService(body: PostRequest): Promise<any> {
     try {
-        console.log(BASE_URL)
+        revalidateTag("services")
         const response = await fetch(`${BASE_URL}/api/post`, {
             method: "POST",
             body: JSON.stringify(body),

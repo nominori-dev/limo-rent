@@ -80,6 +80,18 @@ export default function EditVehicleForm(input: UpdateFormInput){
                                        defaultValue={input.vehicle.vehiclePassenger}/>
                             </div>
                             <div>
+                                <Label htmlFor={"vehicleClass"}>Rodzaj pojazdu:</Label>
+                                <select id={"vehicleClass"}
+                                        {...register("vehicleClass", {required: true})}
+                                        defaultValue={input.vehicle.vehicleClass}>
+                                    <option value={"BUSINESS"}>BUSINESS</option>
+                                    <option value={"LUXURY"}>LUXURY</option>
+                                    <option value={"LUXURY_SUV"}>LUXURY SUV</option>
+                                    <option value={"LUXURY_MPV"}>LUXURY MPV</option>
+                                    <option value={"LUXURY_COACH"}>LUXURY COACH</option>
+                                </select>
+                            </div>
+                            <div>
                                 <Label htmlFor={"vehicleDescription"}>Opis samochodu</Label>
                                 <Textarea
                                     id={"vehicleDescription"} {...register("vehicleDescription", {required: true})}

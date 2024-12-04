@@ -106,7 +106,7 @@ export default async function DashboardPage() {
                                     </svg>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-2xl font-bold">{vehicles.length} samochód</div>
+                                    <div className="text-2xl font-bold">{vehicles.length > 1 ? <span>{vehicles.length} samochody </span> : <span>{vehicles.length} samochód</span>}</div>
                                     <p className="text-xs text-muted-foreground">
 
                                     </p>

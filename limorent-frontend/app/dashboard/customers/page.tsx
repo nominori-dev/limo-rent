@@ -7,6 +7,10 @@ import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Table
 import Link from "next/link";
 import {CustomerResponse} from "@/app/dashboard/customers/customer.types";
 import {getCustomers} from "@/app/dashboard/customers/actions";
+import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/app/components/ui/dialog";
+import EditVehicleImageForm from "@/app/dashboard/fleet/edit/components/EditVehicleImageForm";
+import * as React from "react";
+import DeleteCustomerDialog from "./components/DeleteCustomerDialog";
 
 export const metadata: Metadata = {
     title: "Dashboard",
@@ -74,8 +78,15 @@ export default async function CustomersPage() {
                                                     </TableCell>
                                                     <TableCell>
                                                         <div className={"space-x-2"}>
-                                                            <Link href={`./customer/${customer.id}`}><Button>Zobacz</Button></Link>
-                                                            <Button variant={"destructive"}>Usuń</Button>
+                                                            <Dialog>
+                                                                <DialogTrigger asChild><Button variant={"destructive"}>Usuń</Button></DialogTrigger>
+                                                                <DialogContent>
+                                                                    <DialogHeader>
+                                                                        <DialogTitle>Czy chcesz usunąć klienta?</DialogTitle>
+                                                                    </DialogHeader>
+                                                                    <DeleteCustomerDialog id={customer.id}/>
+                                                                </DialogContent>
+                                                            </Dialog>
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>

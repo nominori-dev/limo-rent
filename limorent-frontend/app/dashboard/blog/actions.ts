@@ -69,3 +69,15 @@ export async function addBlogPost(body: PostRequest): Promise<any> {
         throw error;
     }
 }
+
+export async function deletePostById(id: number): Promise<any> {
+    try {
+        await fetch(`${BASE_URL}/api/post/${id}`, {
+            method: "DELETE",
+        });
+    } catch (error) {
+        console.error(`Error deleting post by id from API: ${error}`);
+        console.error(`ID: ${id}`)
+        throw error;
+    }
+}

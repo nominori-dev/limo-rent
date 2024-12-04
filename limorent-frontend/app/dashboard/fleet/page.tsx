@@ -11,11 +11,9 @@ import {VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
 import {getVehicles} from "@/app/dashboard/fleet/actions";
 import Link from "next/link";
 import * as React from "react";
-
-export const metadata: Metadata = {
-    title: "Dashboard",
-    description: "Example dashboard app built using the components.",
-}
+import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/app/components/ui/dialog";
+import DeleteVehicleImageForm from "@/app/dashboard/fleet/edit/components/DeleteVehicleImageForm";
+import DeleteVehicleForm from "@/app/dashboard/fleet/edit/components/DeleteVehicleForm";
 
 export default async function FleetPage() {
 
@@ -31,10 +29,16 @@ export default async function FleetPage() {
                     </div>
                 </div>
             </div>
-            <div className="flex items-center justify-between space-y-2">
-                <Link href={"/dashboard/fleet"}><Button className={"tracking-tight"}>Wróć do floty</Button></Link>
-            </div>
             <div className="flex-1 space-y-4 p-8 pt-6">
+                <div className="flex items-center justify-between space-y-2">
+                    <h2 className="text-3xl font-bold tracking-tight">Zarządzanie flotą</h2>
+                    <div className="flex items-center space-x-2">
+                        <Link href={"./fleet/add"}>
+                            <Button>Dodaj nowy samochód</Button>
+                        </Link>
+                        <Button>Pobierz listę</Button>
+                    </div>
+                </div>
                 <Tabs defaultValue="overview" className="space-y-4">
                     <TabsContent value="overview" className="space-y-4">
                         <div>
@@ -43,12 +47,12 @@ export default async function FleetPage() {
                                     <TableCaption>Lista samochodów</TableCaption>
                                     <TableHeader>
                                         <TableRow>
-                                            <TableHead>L.p.</TableHead>
+                                            <TableHead>ID</TableHead>
                                             <TableHead>Nazwa</TableHead>
                                             <TableHead>Klasa</TableHead>
                                             <TableHead>Liczba miejsc</TableHead>
                                             <TableHead>Bagaż</TableHead>
-                                            <TableHead>Akcje</TableHead>
+                                            <TableHead className={"text-center"}>Akcje</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
@@ -71,11 +75,19 @@ export default async function FleetPage() {
                                                         {vehicle.vehicleLuggage}
                                                     </TableCell>
                                                     <TableCell>
-                                                        <div className={"space-x-2"}>
-                                                            <Link href={`./fleet/${vehicle.id}`}><Button>Zobacz</Button></Link>
+                                                        <div className={"space-x-2 text-center"}>
+                                                            <Link href={`./fleet/${vehicle.id}`}><Button variant={"outline"}>Podgląd</Button></Link>
                                                             <Link
                                                                 href={`./fleet/edit/${vehicle.id}`}><Button>Edytuj</Button></Link>
-                                                            <Button variant={"destructive"}>Usuń</Button>
+                                                            <Dialog>
+                                                                <DialogTrigger asChild><Button variant={"destructive"}>Usuń</Button></DialogTrigger>
+                                                                <DialogContent>
+                                                                    <DialogHeader>
+                                                                        <DialogTitle>Czy chcesz usunąć zdjęcie?</DialogTitle>
+                                                                    </DialogHeader>
+                                                                    <DeleteVehicleForm vehicle={vehicle}/>
+                                                                </DialogContent>
+                                                            </Dialog>
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>

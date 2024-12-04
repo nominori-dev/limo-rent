@@ -13,6 +13,7 @@ import { Toast } from "@/app/components/ui/toast";
 import {useToast} from "@/app/hooks/use-toast";
 import {OfferRequest} from "@/app/dashboard/customers/customer.types";
 import {generateOffer} from "@/app/dashboard/customers/actions";
+import {VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
 
 type Inputs = {
     firstName: string;
@@ -23,7 +24,11 @@ type Inputs = {
     vehicleId: number;
 };
 
-export default function ContactForm() {
+export interface ContactOptions {
+    vehicles: VehicleResponse[];
+}
+
+export default function ContactForm({vehicles}: ContactOptions) {
     const { register, handleSubmit, formState: { isSubmitting }, reset } = useForm<Inputs>({
         mode: "onChange",
     });
@@ -85,9 +90,11 @@ export default function ContactForm() {
                         </label>
                         <select
                             className="select select-bordered select-primary w-full" {...register("vehicleId", {required: true})}>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            {
+                                vehicles.map(vehicle => (
+                                    <option key={vehicle.id} value={vehicle.id}>{vehicle.vehicleName}</option>
+                                ))
+                            }
                         </select>
                     </div>
                     <div>

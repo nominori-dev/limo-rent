@@ -7,6 +7,9 @@ import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Table
 import Link from "next/link";
 import {PostResponse} from "@/app/dashboard/services/services.types";
 import {getServicesPosts} from "@/app/dashboard/services/actions";
+import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/app/components/ui/dialog";
+import DeletePostDialog from "@/app/dashboard/shared/components/DeletePostDialog";
+import * as React from "react";
 
 export const metadata: Metadata = {
     title: "Dashboard",
@@ -76,7 +79,15 @@ export default async function ServicesPostsPage() {
                                                         <div className={"space-x-2"}>
                                                             <Link href={`./services/${post.slug}`}><Button>Zobacz</Button></Link>
                                                             <Link href={`./services/edit/${post.slug}`}><Button>Edytuj</Button></Link>
-                                                            <Button variant={"destructive"}>Usuń</Button>
+                                                            <Dialog>
+                                                                <DialogTrigger asChild><Button variant={"destructive"}>Usuń</Button></DialogTrigger>
+                                                                <DialogContent>
+                                                                    <DialogHeader>
+                                                                        <DialogTitle>Czy chcesz usunąć post?</DialogTitle>
+                                                                    </DialogHeader>
+                                                                    <DeletePostDialog post={post}/>
+                                                                </DialogContent>
+                                                            </Dialog>
                                                         </div>
                                                     </TableCell>
                                                 </TableRow>

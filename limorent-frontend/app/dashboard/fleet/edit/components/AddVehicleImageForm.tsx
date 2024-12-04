@@ -11,9 +11,14 @@ import {
     VehicleImageResponse,
     VehiclePriceRequest,
     VehiclePriceResponse,
-    VehicleRequest
+    VehicleRequest, VehicleResponse
 } from "@/app/dashboard/fleet/fleet.types";
-import {updateVehicleById, updateVehicleImageById, updateVehiclePriceById} from "@/app/dashboard/fleet/actions";
+import {
+    addVehicleImage,
+    updateVehicleById,
+    updateVehicleImageById,
+    updateVehiclePriceById
+} from "@/app/dashboard/fleet/actions";
 import {useRouter} from "next/navigation";
 
 type Inputs = {
@@ -24,10 +29,10 @@ type Inputs = {
 }
 
 interface UpdateFormInput {
-    vehicleImage: VehicleImageResponse;
+    vehicle: VehicleResponse;
 }
 
-export default function EditVehicleImageForm(input: UpdateFormInput){
+export default function AddVehicleImageForm(input: UpdateFormInput){
 
     const router = useRouter();
 
@@ -38,21 +43,21 @@ export default function EditVehicleImageForm(input: UpdateFormInput){
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
-        const updatedImage: VehicleImageRequest = {
-            vehicleId: input.vehicleImage.vehicleId,
+        const image: VehicleImageRequest = {
+            vehicleId: input.vehicle.id,
             imageType: data.imageType,
             imageUrl: data.imageUrl,
             imageAlt: data.imageAlt
         };
 
-        await updateVehicleImageById(input.vehicleImage.id, updatedImage);
+        await addVehicleImage(image);
 
         toast({
-            description: "Zdjęcie zaktualizowane!",
+            description: "Zdjęcie dodane pomyślnie!",
             variant: "default",
         });
 
-        router.push(`/dashboard/fleet/${input.vehicleImage.vehicleId}`);
+        router.push(`/dashboard/fleet/${input.vehicle.id}`);
     };
 
 
@@ -64,7 +69,7 @@ export default function EditVehicleImageForm(input: UpdateFormInput){
                         <div className={"space-y-4"}>
                             <div className={"flex flex-col space-y-2"}>
                                 <Label htmlFor={"imageType"}>Rodzaj</Label>
-                                <select id={"imageType"} {...register("imageType", {required: true})} defaultValue={input.vehicleImage.imageType}>
+                                <select id={"imageType"} {...register("imageType", {required: true})}>
                                     <option value={"MAIN"}>Główne</option>
                                     <option value={"GALLERY"}>Galeria</option>
                                 </select>
@@ -73,16 +78,16 @@ export default function EditVehicleImageForm(input: UpdateFormInput){
                                 <Label htmlFor={"imageUrl"}>Link do zdjęcia</Label>
                                 <Input id={"imageUrl"}
                                        {...register("imageUrl", {required: true})}
-                                       defaultValue={input.vehicleImage.imageUrl}/>
+                                       placeholder={"Wprowadź link do zdjęcia"}/>
                             </div>
                             <div>
                                 <Label htmlFor={"imageAlt"}>Tekst alternatywny</Label>
                                 <Input id={"imageAlt"}
                                        {...register("imageAlt", {required: true})}
-                                       defaultValue={input.vehicleImage.imageAlt}/>
+                                       placeholder={"Wprowadź tekst alternatywny"}/>
                             </div>
                             <div>
-                                <Button type={"submit"}>Zapisz</Button>
+                                <Button type={"submit"}>Dodaj</Button>
                             </div>
                         </div>
                     </TabsContent>

@@ -1,16 +1,18 @@
-import ContactForm from "@/app/contact/components/ContactForm";
+import ContactForm, {ContactOptions} from "@/app/contact/components/ContactForm";
 import React from "react";
 import Link from "next/link";
 import {Button} from "@/app/components/ui/button";
 import {Facebook, Github, Twitter} from "lucide-react";
 
 
-export default function ContactSection(){
+
+
+export default function ContactSection({vehicles}: ContactOptions){
     return (
         <div id={'contact-section'}>
             <div className={'flex flex-col lg:flex-row space-x-0 lg:space-x-4 space-y-4 lg:space-y-0'}>
                 <div className={"w-[40%]"}>
-                    <ContactForm/>
+                    <ContactForm vehicles={vehicles}/>
                 </div>
                 <div className={'lg:p-12 flex flex-col py-16 space-y-6 text-left text-base-content'}>
                     <div>

@@ -33,7 +33,6 @@ export default async function VehiclePage({
                 <div className="flex h-16 items-center px-4">
                     <MainNav className="mx-6"/>
                     <div className="ml-auto flex items-center space-x-4">
-                        <Search/>
                         <UserNav/>
                     </div>
                 </div>
@@ -176,7 +175,6 @@ export default async function VehiclePage({
                                 <TableHead className={"text-center"}>ID</TableHead>
                                 <TableHead className={"text-center"}>Tytuł</TableHead>
                                 <TableHead className={"text-center"}>Cena</TableHead>
-                                <TableHead className={"text-center"}>Akcje</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -191,12 +189,6 @@ export default async function VehiclePage({
                                         </TableCell>
                                         <TableCell>
                                             {price.price / 100} zł
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className={"space-x-2"}>
-                                                <Button>Zmień</Button>
-                                                <Button variant={"destructive"}>Usuń</Button>
-                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))
