@@ -1,25 +1,15 @@
 import {Button} from "@/app/components/ui/button"
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/app/components/ui/card"
 import {Tabs, TabsContent} from "@/app/components/ui/tabs"
-import {Metadata} from "next";
-import {Search} from "../components/search";
 import {MainNav} from "../components/main-nav";
-import {CalendarDateRangePicker} from "@/app/dashboard/components/date-range-picker";
 import {UserNav} from "@/app/dashboard/components/user-nav";
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
-import {VehicleResponse} from "@/app/dashboard/fleet/fleet.types";
-import {getVehicles} from "@/app/dashboard/fleet/actions";
 import Link from "next/link";
-import * as React from "react";
+import {PostResponse} from "@/app/dashboard/services/services.types";
+import {getBlogPosts} from "@/app/dashboard/blog/actions";
 
-export const metadata: Metadata = {
-    title: "Dashboard",
-    description: "Example dashboard app built using the components.",
-}
+export default async function ServicesPostsPage() {
 
-export default async function FleetPage() {
-
-    const vehicles: VehicleResponse[] = await getVehicles();
+    const posts: PostResponse[] = await getBlogPosts();
 
     return (
         <div className="flex-col md:flex">
@@ -31,50 +21,55 @@ export default async function FleetPage() {
                     </div>
                 </div>
             </div>
-            <div className="flex items-center justify-between space-y-2">
-                <Link href={"/dashboard/fleet"}><Button className={"tracking-tight"}>Wróć do floty</Button></Link>
-            </div>
             <div className="flex-1 space-y-4 p-8 pt-6">
+                <div className="flex items-center justify-between space-y-2">
+                    <h2 className="text-3xl font-bold tracking-tight">Zarządzanie blogiem</h2>
+                    <div className="flex items-center space-x-2">
+                        <Link href={"./blog/add"}>
+                            <Button>Dodaj nowy post</Button>
+                        </Link>
+                        <Button>Pobierz listę</Button>
+                    </div>
+                </div>
                 <Tabs defaultValue="overview" className="space-y-4">
                     <TabsContent value="overview" className="space-y-4">
                         <div>
                             <div className="overflow-x-auto w-full">
                                 <Table>
-                                    <TableCaption>Lista samochodów</TableCaption>
+                                    <TableCaption>Ostatnie posty</TableCaption>
                                     <TableHeader>
                                         <TableRow>
-                                            <TableHead>L.p.</TableHead>
-                                            <TableHead>Nazwa</TableHead>
-                                            <TableHead>Klasa</TableHead>
-                                            <TableHead>Liczba miejsc</TableHead>
-                                            <TableHead>Bagaż</TableHead>
+                                            <TableHead>ID</TableHead>
+                                            <TableHead>Tytuł</TableHead>
+                                            <TableHead>Kategoria</TableHead>
+                                            <TableHead>Krótki URL</TableHead>
+                                            <TableHead>Data dodania</TableHead>
                                             <TableHead>Akcje</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
                                         {
-                                            vehicles.map(vehicle => (
-                                                <TableRow key={vehicle.id} id={vehicle.id!.toString()}>
+                                            posts.map(post => (
+                                                <TableRow key={post.id} id={post.id!.toString()}>
                                                     <TableCell>
-                                                        {vehicle.id}
+                                                        {post.id}
                                                     </TableCell>
                                                     <TableCell>
-                                                        {vehicle.vehicleName}
+                                                        {post.title}
                                                     </TableCell>
                                                     <TableCell>
-                                                        {vehicle.vehicleClass}
+                                                        {post.category}
                                                     </TableCell>
                                                     <TableCell>
-                                                        {vehicle.vehiclePassenger}
+                                                        {post.slug}
                                                     </TableCell>
                                                     <TableCell>
-                                                        {vehicle.vehicleLuggage}
+                                                        {post.createdAt}
                                                     </TableCell>
                                                     <TableCell>
                                                         <div className={"space-x-2"}>
-                                                            <Link href={`./fleet/${vehicle.id}`}><Button>Zobacz</Button></Link>
-                                                            <Link
-                                                                href={`./fleet/edit/${vehicle.id}`}><Button>Edytuj</Button></Link>
+                                                            <Link href={`./blog/${post.slug}`}><Button>Zobacz</Button></Link>
+                                                            <Link href={`./blog/edit/${post.slug}`}><Button>Edytuj</Button></Link>
                                                             <Button variant={"destructive"}>Usuń</Button>
                                                         </div>
                                                     </TableCell>

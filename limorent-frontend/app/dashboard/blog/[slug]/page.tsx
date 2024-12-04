@@ -30,10 +30,10 @@ export default async function ServicePage({
             </div>
             <div className="flex-1 space-y-4 p-8 pt-6">
                 <div className="flex items-center justify-between space-y-2">
-                    <Link href={"/dashboard/services"}><Button className={"tracking-tight"}>Wróć do usług</Button></Link>
+                    <Link href={"/dashboard/blog"}><Button className={"tracking-tight"}>Wróć do zarządzania blogiem</Button></Link>
                     <div className="flex items-center space-x-2">
-                        <Link href={`/dashboard/services/edit/${slug}`}>
-                            <Button>Edytuj stronę</Button>
+                        <Link href={`/dashboard/blog/edit/${slug}`}>
+                            <Button>Edytuj post</Button>
                         </Link>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ public interface VehicleImageService {
     VehicleImage getById(Long id);
     List<VehicleImage> getAllVehicleImages();
     List<VehicleImage> getByVehicle(Vehicle vehicle);
+    VehicleImage updateVehicleImage(Long id, VehicleImage VehicleImage);
     void deleteById(Long id);
     void deleteByVehicle(Vehicle vehicle);
 }

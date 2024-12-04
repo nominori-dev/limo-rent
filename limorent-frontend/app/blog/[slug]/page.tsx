@@ -1,13 +1,10 @@
-import {Button} from "@/app/components/ui/button";
 import * as React from "react";
-import {MainNav} from "@/app/dashboard/components/main-nav";
-import {Search} from "@/app/dashboard/components/search";
-import {UserNav} from "@/app/dashboard/components/user-nav";
 import {Tabs, TabsContent} from "@/app/components/ui/tabs";
-import Link from "next/link";
 import {getPostBySlug} from "@/app/dashboard/services/actions";
 import {PostResponse} from "@/app/dashboard/services/services.types";
 import markdownToHtml from "@/app/components/mdx/lib/mdxToHtml";
+import Link from "next/link";
+import {Button} from "@/app/components/ui/button";
 
 export default async function ServicePage({
                                               params,
@@ -20,23 +17,12 @@ export default async function ServicePage({
 
     return (
         <div className={"pt-10"}>
-            <div className="border-b">
-                <div className="flex h-16 items-center px-4">
-                    <MainNav className="mx-6"/>
-                    <div className="ml-auto flex items-center space-x-4">
-                        <UserNav/>
-                    </div>
+            <div className="flex-1 space-y-4 p-8 pt-6">
+                <div className="flex items-center justify-between space-y-2">
+                    <Link href={"/"}><Button className={"tracking-tight"}>Wróć na głowną</Button></Link>
                 </div>
             </div>
             <div className="flex-1 space-y-4 p-8 pt-6">
-                <div className="flex items-center justify-between space-y-2">
-                    <Link href={"/dashboard/services"}><Button className={"tracking-tight"}>Wróć do usług</Button></Link>
-                    <div className="flex items-center space-x-2">
-                        <Link href={`/dashboard/services/edit/${slug}`}>
-                            <Button>Edytuj stronę</Button>
-                        </Link>
-                    </div>
-                </div>
                 <Tabs defaultValue="overview" className="space-y-4">
                     <TabsContent value="overview" className="space-y-4">
                         <h1 className="bg-clip-text text-transparent text-left bg-gradient-to-b from-neutral-900 to-neutral-700 text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">

@@ -144,6 +144,15 @@ public class VehicleController {
         return imageMapper.toDto(vehicleImageService.addVehicleImage(vehicleImage));
     }
 
+    @PutMapping("/image/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public VehicleImageResponse updateVehicleImage(@PathVariable Long id, @RequestBody VehicleImageRequest vehicleImageRequest){
+        Vehicle vehicle = vehicleService.getById(vehicleImageRequest.getVehicleId());
+        VehicleImage vehicleImage = vehicleImageRequest.toVehicleImage(vehicle);
+
+        return imageMapper.toDto(vehicleImageService.updateVehicleImage(id, vehicleImage));
+    }
+
     @DeleteMapping("/image/{imageId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteVehicleImage(@PathVariable Long imageId) {

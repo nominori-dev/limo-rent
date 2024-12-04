@@ -10,6 +10,7 @@ import * as React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {toast} from "@/app/hooks/use-toast";
 import {updateServiceById} from "@/app/dashboard/services/actions";
+import {useRouter} from "next/navigation";
 
 type Inputs = {
     title: string;
@@ -24,6 +25,8 @@ interface UpdateFormInput {
 }
 
 export default function UpdateServiceForm(input: UpdateFormInput){
+
+    const router = useRouter();
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { register, handleSubmit, formState: { isSubmitting }, reset } = useForm<Inputs>({
@@ -47,6 +50,7 @@ export default function UpdateServiceForm(input: UpdateFormInput){
             description: "Usługa zaaktualizowana!",
             variant: "default",
         });
+        router.push(`/dashboard/services/${data.slug}`);
     };
 
 

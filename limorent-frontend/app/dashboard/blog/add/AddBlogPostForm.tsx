@@ -10,6 +10,7 @@ import * as React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {toast} from "@/app/hooks/use-toast";
 import {addService} from "@/app/dashboard/services/actions";
+import {addBlogPost} from "@/app/dashboard/blog/actions";
 import {useRouter} from "next/navigation";
 
 type Inputs = {
@@ -21,7 +22,7 @@ type Inputs = {
 }
 
 
-export default function AddServiceForm(){
+export default function AddBlogPostForm(){
 
     const router = useRouter();
 
@@ -35,20 +36,19 @@ export default function AddServiceForm(){
         const newPost: PostRequest = {
             title: data.title,
             content: data.content,
-            category: "services",
+            category: "blog",
             slug: data.slug,
             metaTitle: data.metaTitle,
             metaDescription: data.metaDescription
         };
 
-        await addService(newPost);
+        await addBlogPost(newPost);
 
         toast({
-            description: "Usługa dodana pomyślnie!",
+            description: "Post dodany pomyślnie!",
             variant: "default",
         });
-
-        router.push("/dashboard/services")
+        router.push("/dashboard/blog")
     };
 
 
@@ -56,8 +56,7 @@ export default function AddServiceForm(){
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex-1 space-y-4 p-8 pt-6">
                 <div className="flex items-center justify-between space-y-2">
-                    <Link href={"/dashboard/services"}><Button className={"tracking-tight"}>Wróć do
-                        usług</Button></Link>
+                    <Link href={"/dashboard/blog"}><Button className={"tracking-tight"}>Wróć do zarządzania blogiem</Button></Link>
                     <div className="flex items-center space-x-2">
                         <Button type={"submit"}>Zapisz</Button>
                     </div>
@@ -66,7 +65,7 @@ export default function AddServiceForm(){
                     <TabsContent value="overview" className="space-y-4">
                         <div className={"space-y-2"}>
                             <div>
-                                <Label htmlFor={"title"}>Tytuł usługi</Label>
+                                <Label htmlFor={"title"}>Tytuł</Label>
                                 <Input id={"title"} {...register("title", {required: true})} placeholder={"Wprowadź tytuł"}/>
                             </div>
                             <div>
@@ -82,8 +81,8 @@ export default function AddServiceForm(){
                                 <Input id={"metaDescription"} {...register("metaDescription", {required: true})} placeholder={"Wprowadź SEO Opis"}/>
                             </div>
                             <div className={"grid w-full gap-1.5"}>
-                                <Label htmlFor={"content"}>Treść usługi:</Label>
-                                <Textarea {...register("content", {required: true})} placeholder={"Napisz treść usługi"} id={"content"}/>
+                                <Label htmlFor={"content"}>Treść:</Label>
+                                <Textarea {...register("content", {required: true})} placeholder={"Napisz treść"} id={"content"}/>
                             </div>
                         </div>
                     </TabsContent>

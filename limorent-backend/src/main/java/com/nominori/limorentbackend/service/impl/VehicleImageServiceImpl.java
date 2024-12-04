@@ -22,6 +22,7 @@ public class VehicleImageServiceImpl implements VehicleImageService {
         return vehicleImageRepository.save(VehicleImage);
     }
 
+
     @Override
     public VehicleImage getById(Long id) {
         return vehicleImageRepository.findById(id)
@@ -36,6 +37,16 @@ public class VehicleImageServiceImpl implements VehicleImageService {
     @Override
     public List<VehicleImage> getByVehicle(Vehicle vehicle) {
         return vehicleImageRepository.findByVehicle(vehicle);
+    }
+
+    @Override
+    public VehicleImage updateVehicleImage(Long id, VehicleImage VehicleImage) {
+        VehicleImage image = getById(id);
+        image.setVehicle(VehicleImage.getVehicle());
+        image.setImageAlt(VehicleImage.getImageAlt());
+        image.setImageType(VehicleImage.getImageType());
+        image.setImageUrl(VehicleImage.getImageUrl());
+        return vehicleImageRepository.save(image);
     }
 
     @Override

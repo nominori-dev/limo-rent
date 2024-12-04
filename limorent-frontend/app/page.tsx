@@ -4,6 +4,7 @@ import ContactSection from "@/app/contact/components/ContactSection";
 import * as React from "react";
 import ServicesSection from "@/app/services/components/ServiceSection";
 import Link from "next/link";
+import BlogSection from "@/app/blog/components/BlogSection";
 
 export default async function Home() {
 
@@ -34,6 +35,11 @@ export default async function Home() {
                   <h2 className="bg-clip-text text-transparent text-left bg-gradient-to-b from-neutral-900 to-neutral-700 text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">
                       Aktualności
                   </h2>
+                  <BlogSection onlyRecent={true}/>
+                  <div className={"pt-4 mx-auto text-center"}>
+                      <p className="underline underline-offset-4 text-2xl link-hover font-semibold text-base-content">
+                          <Link href="/services">przejdź do wszystkich postów</Link></p>
+                  </div>
               </div>
               <div>
                   <h2 className="bg-clip-text text-transparent text-left bg-gradient-to-b from-neutral-900 to-neutral-700 text-2xl md:text-4xl lg:text-7xl font-sans py-2 md:py-10 relative z-20 font-bold tracking-tight">

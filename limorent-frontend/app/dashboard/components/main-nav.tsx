@@ -35,6 +35,12 @@ export function MainNav({
       >
         Usługi
       </Link>
+      <Link
+          href="/dashboard/blog"
+          className="text-sm font-medium transition-colors hover:text-primary"
+      >
+        Blog
+      </Link>
     </nav>
   )
 }
