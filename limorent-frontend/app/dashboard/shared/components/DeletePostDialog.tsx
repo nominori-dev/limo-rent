@@ -34,7 +34,7 @@ export default function DeleteVehicleForm({post}: FormInput){
             variant: "default",
         });
 
-        window.location.reload(true);
+        window.location.reload();
     };
 
 
