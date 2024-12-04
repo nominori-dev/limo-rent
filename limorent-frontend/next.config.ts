@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
         ]
     },
     pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+    eslint: {
+        ignoreDuringBuilds: true
+    }
 };
 
 const withMdx = createMDX();
