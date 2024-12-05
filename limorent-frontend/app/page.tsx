@@ -41,7 +41,7 @@ export default async function Home() {
                   <BlogSection onlyRecent={true}/>
                   <div className={"pt-4 mx-auto text-center"}>
                       <p className="underline underline-offset-4 text-2xl link-hover font-semibold text-base-content">
-                          <Link href="/services">przejdź do wszystkich postów</Link></p>
+                          <Link href="/blog">przejdź do wszystkich postów</Link></p>
                   </div>
               </div>
               <div>
