@@ -49,6 +49,22 @@ export async function deleteVehicleById(id: number): Promise<any> {
     }
 }
 
+export async function addVehicle(body: VehicleRequest): Promise<any> {
+    try{
+        revalidateTag("vehicles")
+        const response = await fetch(`${BASE_URL}/api/vehicle`, {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {"Content-Type": "application/json"}
+        });
+
+        return await response.json();
+    } catch (error) {
+        console.error(`Error creating vehicle, error from API: ${error}`);
+        throw error;
+    }
+}
+
 export async function updateVehicleById(id: number, body: VehicleRequest): Promise<any> {
     try{
         revalidateTag("vehicles")
