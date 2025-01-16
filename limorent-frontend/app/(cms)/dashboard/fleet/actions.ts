@@ -215,3 +215,16 @@ export async function getPriceByVehicleId(id: number): Promise<any> {
         throw error;
     }
 }
+
+export async function uploadImage(form: FormData){
+    try{
+        const response = await fetch(`${BASE_URL}/api/image`, {
+            method: "POST",
+            body: form
+        })
+
+        return await response.json()
+    } catch (error) {
+        console.error(`Error uploading image: ${error}`)
+    }
+}

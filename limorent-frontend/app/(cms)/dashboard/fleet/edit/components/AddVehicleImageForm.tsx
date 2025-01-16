@@ -17,14 +17,14 @@ import {
     addVehicleImage,
     updateVehicleById,
     updateVehicleImageById,
-    updateVehiclePriceById
+    updateVehiclePriceById, uploadImage
 } from "@/app/(cms)/dashboard/fleet/actions";
 import {useRouter} from "next/navigation";
 
 type Inputs = {
     vehicleId: number;
     imageType: "MAIN" | "GALLERY";
-    imageUrl: string;
+    file: any;
     imageAlt?: string;
 }
 
@@ -43,10 +43,17 @@ export default function AddVehicleImageForm(input: UpdateFormInput){
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
 
+        const formData = new FormData();
+        formData.append("file", data.file[0])
+
+        const id = await uploadImage(formData).then((data) => {
+            return data.id;
+        });
+
         const image: VehicleImageRequest = {
             vehicleId: input.vehicle.id,
             imageType: data.imageType,
-            imageUrl: data.imageUrl,
+            imageUrl: `/img/${id}`,
             imageAlt: data.imageAlt
         };
 
@@ -75,10 +82,10 @@ export default function AddVehicleImageForm(input: UpdateFormInput){
                                 </select>
                             </div>
                             <div>
-                                <Label htmlFor={"imageUrl"}>Link do zdjęcia</Label>
-                                <Input id={"imageUrl"}
-                                       {...register("imageUrl", {required: true})}
-                                       placeholder={"Wprowadź link do zdjęcia"}/>
+                                <Label htmlFor={"file"}>Zdjęcie:</Label>
+                                <Input type={"file"} id={"file"}
+                                       {...register("file", {required: true})}
+                                       placeholder={"Wybierz zdjęcie"}/>
                             </div>
                             <div>
                                 <Label htmlFor={"imageAlt"}>Tekst alternatywny</Label>

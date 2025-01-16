@@ -39,9 +39,9 @@ export default async function VehiclePage({
             </div>
             <div className="flex-1 space-y-4 p-8 pt-6">
                 <div className="flex items-center justify-between space-y-2">
-                    <Link href={"/app/(cms)/dashboard/fleet"}><Button className={"tracking-tight"}>Wróć do zarządzania flotą</Button></Link>
+                    <Link href={"/dashboard/fleet"}><Button className={"tracking-tight"}>Wróć do zarządzania flotą</Button></Link>
                     <div className="flex items-center space-x-2">
-                        <Link href={`/app/(cms)/dashboard/fleet/edit/${id}`}><Button>Edytuj ofertę</Button></Link>
+                        <Link href={`/dashboard/fleet/edit/${id}`}><Button>Edytuj ofertę</Button></Link>
                     </div>
                 </div>
                 <Tabs defaultValue="overview" className="space-y-4">

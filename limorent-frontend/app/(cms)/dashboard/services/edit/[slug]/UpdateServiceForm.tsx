@@ -58,7 +58,7 @@ export default function UpdateServiceForm(input: UpdateFormInput){
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex-1 space-y-4 p-8 pt-6">
                 <div className="flex items-center justify-between space-y-2">
-                    <Link href={"/app/(cms)/dashboard/services"}><Button className={"tracking-tight"}>Wróć do
+                    <Link href={"/dashboard/services"}><Button className={"tracking-tight"}>Wróć do
                         usług</Button></Link>
                     <div className="flex items-center space-x-2">
                         <Button type={"submit"}>Zapisz</Button>
