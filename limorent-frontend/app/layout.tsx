@@ -1,11 +1,6 @@
-import type {Metadata} from "next";
+import SessionWrapper from "@/app/(main)/components/SessionWrapper";
 import localFont from "next/font/local";
-import "./globals.css";
-import Navbar from "@/app/components/layout/Navbar";
-import Footer from "./components/layout/Footer";
-import {Toaster} from "@/app/components/ui/toaster";
-import {ToastProvider} from "@/app/components/ui/toast";
-import SessionWrapper from "@/app/components/SessionWrapper";
+import type {Metadata} from "next";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -34,13 +29,8 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased `}
             >
-            <div className={"mx-auto max-w-[1440px]"}>
-                <ToastProvider>
-                    <Navbar/>
-                    {children}
-                    <Footer/>
-                    <Toaster/>
-                </ToastProvider>
+            <div className={"mx-auto"}>
+                {children}
             </div>
             </body>
             </html>
